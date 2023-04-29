@@ -1,0 +1,120 @@
+syntax = "proto3";
+
+package license;
+
+
+service LicenseService {
+  rpc ListLicenses (ListLicensesRequest) returns (ListLicensesResponse) {}
+  rpc ShowLicense (ShowLicenseRequest) returns (License) {}
+  rpc CreateLicense (CreateLicenseRequest) returns (License) {}
+  rpc UpdateLicense (UpdateLicenseRequest) returns (License) {}
+  rpc RemoveLicense (RemoveLicenseRequest) returns (RemoveLicenseResponse) {}
+  rpc ActivateLicense (ActivateLicenseRequest) returns (ActivateLicenseResponse) {}
+  rpc RecoveryLicense (RecoveryLicenseRequest) returns (License) {}
+  rpc ValidateSession (ValidateSessionRequest) returns (ValidateSessionResponse) {}
+}
+
+// Common
+message Device {
+  string id = 1;
+  string mac = 2;
+  string instanceId = 3;
+  optional string description = 4;
+}
+
+message License {
+  string id = 1;
+  string name = 2;
+  string key = 3;
+  int32 devicesAllowed = 4;
+  string plannedActivationDate = 5;
+  string expiresAt = 6;
+  optional string status = 7;
+  repeated Device devices = 8;
+  optional string activatedAt = 9;
+  optional string finishedManuallyAt = 10;
+}
+
+// ListLicensesRequest
+message ShowLicenseRequest {
+  string id = 1;
+}
+
+// ListLicensesRequest
+message ListLicensesRequest {
+  int32 limit = 1;
+  int32 offset = 2;
+}
+
+message ListLicensesResponse {
+  repeated License results = 1;
+  int32 count = 2;
+}
+
+// CreateLicense
+message CreateDeviceRequest {
+  string mac = 1;
+  string instanceId = 2;
+  optional string description = 3;
+}
+
+message CreateLicenseRequest {
+  int32 devicesAllowed = 1;
+  string name = 2;
+  string plannedActivationDate = 3;
+  string expiresAt = 4;
+  repeated CreateDeviceRequest devices = 5;
+}
+
+// UpdateLicense
+message UpsertDeviceRequest {
+  string mac = 1;
+  string instanceId = 2;
+  optional string description = 3;
+  optional string id = 4;
+  optional bool toDelete = 5;
+}
+
+message UpdateLicenseRequest {
+  string id = 1;
+  optional string name = 2;
+  optional int32 devicesAllowed = 3;
+  optional string plannedActivationDate = 4;
+  optional string expiresAt = 5;
+  repeated UpsertDeviceRequest devices = 6;
+}
+
+// RemoveLicense
+message RemoveLicenseRequest {
+  string id = 1;
+}
+
+message RemoveLicenseResponse {
+  bool ok = 1;
+}
+
+// ActivateLicense
+message ActivateLicenseRequest {
+  string licenseKey = 1;
+  string mac = 2;
+  string instanceId = 3;
+  string reason = 4;
+}
+
+message ActivateLicenseResponse {
+  string token = 1;
+}
+
+// RecoveryLicense
+message RecoveryLicenseRequest {
+  string id = 1;
+}
+
+// ValidateSession
+message ValidateSessionRequest {
+  string token = 1;
+}
+
+message ValidateSessionResponse {
+  bool ok = 1;
+}

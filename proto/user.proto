@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package user;
+
+
+service UserService {
+  rpc Login (LoginRequest) returns (LoginResponse) {}
+  rpc RenewToken (RenewTokenRequest) returns (RenewTokenResponse) {}
+  rpc ValidateToken (ValidateTokenRequest) returns (User) {}
+}
+
+// Common
+message User {
+  string id = 1;
+  string name = 2;
+  string lastName = 3;
+  string username = 4;
+  repeated string roles = 5;
+}
+
+// LoginService
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  string id = 1;
+  string name = 2;
+  string lastName = 3;
+  string token = 4;
+}
+
+// RenewTokenService
+message RenewTokenRequest {
+  string userId = 1;
+}
+
+message RenewTokenResponse {
+  string token = 1;
+}
+
+// ValidateToken
+message ValidateTokenRequest {
+  string token = 1;
+}

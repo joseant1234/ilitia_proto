@@ -1,0 +1,40 @@
+{
+  "name": "ilitia_proto",
+  "version": "1.0.0",
+  "description": "Ilitia's protocol buffers",
+  "private": false,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "url": "https://github.com/joseant1234/ilitia_proto",
+    "type": "git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "ilitia",
+    "protocol buffers",
+    "grpc"
+  ],
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
+  "files": [
+    "proto"
+  ],
+  "author": "Jose Tafur - Gestyde",
+  "peerDependencies": {},
+  "devDependencies": {
+    "semantic-release": "19.0.5"
+  },
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    "@semantic-release/github",
+    "@semantic-release/npm",
+    "@semantic-release/git"
+  ]
+}
