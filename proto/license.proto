@@ -11,7 +11,6 @@ service LicenseService {
   rpc RemoveLicense (RemoveLicenseRequest) returns (RemoveLicenseResponse) {}
   rpc ActivateLicense (ActivateLicenseRequest) returns (ActivateLicenseResponse) {}
   rpc RecoveryLicense (RecoveryLicenseRequest) returns (License) {}
-  rpc ValidateSession (ValidateSessionRequest) returns (ValidateSessionResponse) {}
 }
 
 // Common
@@ -102,19 +101,10 @@ message ActivateLicenseRequest {
 }
 
 message ActivateLicenseResponse {
-  string token = 1;
+  string sessionId = 1;
 }
 
 // RecoveryLicense
 message RecoveryLicenseRequest {
   string id = 1;
-}
-
-// ValidateSession
-message ValidateSessionRequest {
-  string token = 1;
-}
-
-message ValidateSessionResponse {
-  bool ok = 1;
 }
