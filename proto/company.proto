@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package company;
+
+service CompanyService {
+  rpc ShowCompanyByUrl (ShowCompanyByUrlRequest) returns (Company) {}
+  rpc AutocompleteCompanies (AutocompleteCompaniesRequest) returns (AutocompleteCompaniesResponse) {}
+}
+
+// Common
+message Company {
+  string id = 1;
+  string prefix = 2;
+  string url = 3;
+  string name = 4;
+}
+
+// ShowCompanyByUrl
+message ShowCompanyByUrlRequest {
+  string url = 1;
+}
+
+// AutocompleteCompanies
+message AutocompleteCompaniesRequest {
+  string term = 1;
+}
+
+message AutocompleteCompaniesResponse {
+  repeated Company data = 1;
+}
+
+
