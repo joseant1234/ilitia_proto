@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package failed_synchronization;
+
+import "google/protobuf/any.proto";
+import "google/protobuf/empty.proto";
+
+
+service FailedSynchronizationService {
+  rpc CreateRabbitFailedSynchronization (CreateRabbitFailedSynchronizationRequest) returns (google.protobuf.Empty) {}
+}
+
+// CreateRabbitFailedSynchronization
+message CreateRabbitFailedSynchronizationRequest {
+  google.protobuf.Any payload = 1;
+  string exchange = 2;
+  string routingKey = 3;
+  string queueName = 4;
+}
