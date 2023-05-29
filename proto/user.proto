@@ -47,8 +47,7 @@ message SynchronizeUserRequest {
   string externalId = 1;
   string externalModel = 2;
   string username = 3;
-  string password = 4;
-  bool isActive = 5;
-  repeated string roles = 6;
-  string companyId = 7;
+  bool isActive = 4;
+  repeated string roles = 5;
+  string companyId = 6;
 }
