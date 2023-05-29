@@ -2,18 +2,43 @@ syntax = "proto3";
 
 package failed_synchronization;
 
-import "google/protobuf/any.proto";
 import "google/protobuf/empty.proto";
 
 
 service FailedSynchronizationService {
-  rpc CreateRabbitFailedSynchronization (CreateRabbitFailedSynchronizationRequest) returns (google.protobuf.Empty) {}
+  rpc CreateRabbitFailedUserSynchronization (CreateRabbitFailedUserSynchronizationRequest) returns (google.protobuf.Empty) {}
+  rpc ShowRabbitFailedUserSynchronization (ShowRabbitFailedUserSynchronizationRequest) returns (RabbitFailedUserSynchronization) {}
+}
+
+// Common
+message RabbitFailedUserSynchronization {
+  string id = 1;
+  FailedUserSynchronizationParams params = 2;
+  string exchange = 3;
+  string routingKey = 4;
+  string queueName = 5;
+  string errorMessage = 6;
+}
+
+message FailedUserSynchronizationParams {
+  string id = 1;
+  string username = 2;
+  string companyUrl = 3;
+  string model = 4;
+  bool isActive = 5;
+  string role = 6;
 }
 
 // CreateRabbitFailedSynchronization
-message CreateRabbitFailedSynchronizationRequest {
-  google.protobuf.Any payload = 1;
+message CreateRabbitFailedUserSynchronizationRequest {
+  FailedUserSynchronizationParams params = 1;
   string exchange = 2;
   string routingKey = 3;
   string queueName = 4;
+  string errorMessage = 5;
+}
+
+// ShowRabbitFailedUserSynchronization
+message ShowRabbitFailedUserSynchronizationRequest {
+  string id = 1;
 }
