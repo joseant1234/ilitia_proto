@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package appointment;
+
+service AppointmentService {
+  rpc ListAppointments (ListAppointmentsRequest) returns (ListAppointmentsResponse) {}
+}
+
+// Common
+message Appointment {
+  int32 id = 1;
+  string date = 2;
+  string timeFrom = 3;
+  string timeTo = 4;
+  Patient patient = 5;
+  optional ConsultType consultType = 6;
+  optional string comments = 7;
+}
+
+message Patient {
+  int32 id = 1;
+  string firstName = 2;
+  optional string lastName = 3;
+  optional string lastName2 = 4;
+  string fullName = 5;
+  MedicalHistory medicalHistory = 6;
+}
+
+message MedicalHistory {
+  int32 id = 1;
+  optional string code = 2;
+}
+
+message ConsultType {
+  int32 id = 1;
+  string name = 2;
+}
+
+// ListAppointments
+message ListAppointmentsRequest {
+  string from = 1;
+  string to = 2;
+}
+
+message ListAppointmentsResponse {
+  repeated Appointment results = 1;
+}
+

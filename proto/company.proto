@@ -4,6 +4,7 @@ package company;
 
 service CompanyService {
   rpc ShowCompanyByUrl (ShowCompanyByUrlRequest) returns (Company) {}
+  rpc ShowCompanyById (ShowCompanyByIdRequest) returns (Company) {}
   rpc AutocompleteCompanies (AutocompleteCompaniesRequest) returns (AutocompleteCompaniesResponse) {}
 }
 
@@ -18,6 +19,11 @@ message Company {
 // ShowCompanyByUrl
 message ShowCompanyByUrlRequest {
   string url = 1;
+}
+
+// ShowCompanyById
+message ShowCompanyByIdRequest {
+  string id = 1;
 }
 
 // AutocompleteCompanies

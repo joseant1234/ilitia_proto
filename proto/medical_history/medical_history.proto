@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package medical_history;
+
+import "medical_history/show_medical_history_summary.proto";
+
+
+service MedicalHistoryService {
+  rpc ShowMedicalHistorySummary (medical_history_show_medical_history_summary.ShowMedicalHistorySummaryRequest) returns (medical_history_show_medical_history_summary.ShowMedicalHistorySummaryResponse) {}
+}
