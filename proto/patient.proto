@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package patient;
+
+import "profile.proto";
+
+
+service PatientService {
+    rpc Profile (profile.ProfileRequest) returns (profile.ProfileResponse) {}
+}
+
+

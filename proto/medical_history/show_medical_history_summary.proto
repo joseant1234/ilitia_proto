@@ -1,0 +1,118 @@
+syntax = "proto3";
+
+package medical_history_show_medical_history_summary;
+
+message ShowMedicalHistorySummaryRequest {
+    string medicalHistoryId = 1;
+}
+
+message ShowMedicalHistorySummaryResponse {
+    Bank bank = 1;
+    ClinicalCourse clinicalCourse = 2;
+    Treeatment treatment = 3;
+    Diagnosis diagnosis = 4;
+    MedicalTestRecords medicalTestRecords = 5;
+    HormonalStudy hormonalStudy = 6;
+    MaleFactor maleFactor = 7;
+    bool show = 8;
+}
+
+
+message Bank {
+    int32 selfUseOocytes = 1;
+    int32 selfUseEmbryos = 2;
+    bool show = 3;
+}
+
+message ClinicalCourse {
+    string creationDate = 1;
+    string createdBy = 2;
+    string note = 3;
+    bool show = 4;
+}
+
+message Treeatment {
+    optional string typeTreatment = 1;
+    optional string protocol = 2;
+    optional string startDate = 3;
+    repeated Drug drugs = 4;
+    repeated Drug drugs2 = 5;
+    Control control = 6;
+    repeated TreatmentHeader header = 7;
+    repeated TreatmentHeader header2 = 8;
+    bool show = 9;
+}
+
+message Drug {
+    string name = 1;
+    repeated Day days = 2;
+}
+
+message Day {
+    string dose = 1;
+}
+
+message Control {
+    string gt16Mm = 1;
+    string gt16Right = 2;
+    string gt16Left = 3;
+    string gt13Mm = 4;
+    string gt13Right = 5;
+    string gt13Left = 6;
+    string gt9Mm = 7;
+    string gt9Right = 8;
+    string gt9Left = 9;
+    string lt9Mm = 10;
+    string lt9Right = 11;
+    string lt9Left = 12;
+    string endometrium = 13;
+    string endometriumType = 14;
+    string e2 = 15;
+    string progesterone = 16;
+}
+
+message TreatmentHeader {
+    string date = 1;
+    string cycleDay = 2;
+}
+
+message Diagnosis {
+    string patient = 1;
+    string partner = 2;
+    bool show = 3;
+}
+
+message MedicalTestRecords {
+    repeated MedicalTestRecordData data = 1;
+    bool show = 2;
+}
+
+message MedicalTestRecordData {
+    string testName = 1;
+    string testProfile = 2;
+    string testProfileDetails = 3;
+    string requestDate = 4;
+}
+
+message HormonalStudy {
+    string testDate = 1;
+    string cycleDay = 2;
+    string fsh = 3;
+    string lh = 4;
+    string estradiol = 5;
+    string prolactin = 6;
+    string progesterone = 7;
+    string testosterone = 8;
+    string tsh = 9;
+    string amh = 10;
+    bool show = 11;
+    bool isFemale = 12;
+}
+
+message MaleFactor {
+    string tests = 1;
+    string completionDate = 2;
+    string result = 3;
+    bool show = 4;
+    bool showSection = 5;
+}

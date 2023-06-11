@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package employee;
+
+import "profile.proto";
+
+
+service EmployeeService {
+    rpc Profile (profile.ProfileRequest) returns (profile.ProfileResponse) {}
+}
+
+
