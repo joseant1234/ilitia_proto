@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package treatment_progression;
+
+// Common
+message TypeTreatment {
+    int32 id = 1;
+    string name = 2;
+    string code = 3;
+}
+
+// GetProgression
+message GetProgressionRequest {
+}
+
+message GetProgressionResponse {
+  repeated Milestone results = 1;
+}
+
+message Milestone {
+    string date = 1;
+    string concept = 2;
+    string code = 3;
+    TypeTreatment type_treatment = 4;
+}

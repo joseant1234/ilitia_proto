@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package treatment_dose;
+
+
+// GetProgression
+message GetCurrentDosesFromPatientRequest {
+}
+
+message GetCurrentDosesFromResponse {
+  repeated Induction results = 1;
+}
+
+message Induction {
+  int32 id = 1;
+  Treatment treatment = 2;
+  DrugSchedule drugSchedules = 3;
+}
+
+message Treatment {
+  int32 id = 1;
+  string startAt = 2;
+}
+
+message DrugSchedule {
+  int32 id = 1;
+  Medicine medicine = 2;
+  DrugScheduleDay drugScheduleDays = 3;
+}
+
+message Medicine {
+  int32 id = 1;
+  string name = 2;
+}
+
+message DrugScheduleDay {
+  int32 id = 1;
+  int32 day = 2;
+  float dose = 3;
+  repeated MedicationTaken medicationsTaken = 4;
+}
+
+message MedicationTaken {
+  int32 id = 1;
+  string takenDate = 2;
+  optional string videoUrl =3;
+}

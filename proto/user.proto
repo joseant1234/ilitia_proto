@@ -8,6 +8,11 @@ service UserService {
   rpc ValidateToken (ValidateTokenRequest) returns (User) {}
   rpc SynchronizeUser (SynchronizeUserRequest) returns (User) {}
   rpc ChangePassword (ChangePasswordRequest) returns (ChangePasswordResponse) {}
+  rpc CreatePasswordRecoveryPin (CreatePasswordRecoveryPinRequest) returns (CreatePasswordRecoveryPinResponse) {}
+  rpc ValidatePasswordRecoveryPin (ValidatePasswordRecoveryPinRequest) returns (ValidatePasswordRecoveryPinResponse) {}
+  rpc ChangePasswordAfterRecoveringAccess (ChangePasswordAfterRecoveringAccessRequest) returns (ChangePasswordAfterRecoveringAccessResponse) {}
+  rpc FindUserByUsername (FindUserByUsernameRequest) returns (User) {}
+  rpc FindExternalUser (FindExternalUserRequest) returns (User) {}
 }
 
 // Common
@@ -25,11 +30,14 @@ message User {
 message LoginRequest {
   string username = 1;
   string password = 2;
+  repeated string roles = 3;
 }
 
 message LoginResponse {
   string id = 1;
-  string token = 4;
+  string token = 2;
+  bool hasToChangePassword = 3;
+  repeated string roles = 4;
 }
 
 // RenewTokenService
@@ -39,7 +47,8 @@ message RenewTokenRequest {
 
 message RenewTokenResponse {
   string token = 1;
-
+  bool hasToChangePassword = 2;
+  repeated string roles = 3;
 }
 
 // ValidateToken
@@ -66,4 +75,46 @@ message ChangePasswordRequest {
 
 message ChangePasswordResponse {
   bool ok = 1;
+}
+
+// CreatePasswordRecoveryPin
+message CreatePasswordRecoveryPinRequest {
+  string userId = 1;
+}
+
+message CreatePasswordRecoveryPinResponse {
+  string pin = 1;
+}
+
+// ValidatePasswordRecoveryPin
+message ValidatePasswordRecoveryPinRequest {
+  string pin = 1;
+  string username = 2;
+}
+
+message ValidatePasswordRecoveryPinResponse {
+  bool ok = 1;
+  string token = 2;
+  repeated string roles = 3;
+}
+
+// ChangePasswordAfterRecoveringAccess
+message ChangePasswordAfterRecoveringAccessRequest {
+  string password = 1;
+  string userId = 2;
+}
+
+message ChangePasswordAfterRecoveringAccessResponse {
+  bool ok = 1;
+}
+
+// FindUserByUsername
+message FindUserByUsernameRequest {
+  string username = 1;
+}
+
+// FindExternalUser
+message FindExternalUserRequest {
+  string externalId = 1;
+  string companyId = 2;
 }

@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package attachment;
+
+service AttachmentService {
+  rpc ListAttachmentsFromPatient (ListAttachmentsFromPatientRequest) returns (ListAttachmentsFromPatientResponse) {}
+  rpc GetSetupSaveAttachment (GetSetupSaveAttachmentRequest) returns (GetSetupSaveAttachmentResponse) {}
+  rpc CreateAttachmentFromPatient (CreateAttachmentFromPatientRequest) returns (Attachment) {}
+  rpc DeleteAttachmentFromPatient (DeleteAttachmentFromPatientRequest) returns (DeleteAttachmentFromPatientResponse) {}
+}
+
+// Common
+message Attachment {
+  string uid = 1;
+  string name = 2;
+  string url = 3;
+  string sourceName = 4;
+}
+
+// ListAttachmentsFromPatient
+message ListAttachmentsFromPatientRequest {
+  int32 page = 1;
+  int32 limit = 2;
+}
+
+message ListAttachmentsFromPatientResponse {
+  repeated Attachment results = 1;
+  int32 count = 2;
+}
+
+// GetSetupSaveAttachment
+message GetSetupSaveAttachmentRequest {
+}
+
+message GetSetupSaveAttachmentResponse {
+  repeated SetupAttachmentSource sources = 1;
+}
+
+message SetupAttachmentSource {
+  int32 code = 1;
+  string value = 2;
+}
+
+// CreateAttachmentFromPatient
+message CreateAttachmentFromPatientRequest {
+  string name = 1;
+  string source = 2;
+}
+
+// DeleteAttachmentFromPatient
+message DeleteAttachmentFromPatientRequest {
+  string uid = 1;
+}
+
+message DeleteAttachmentFromPatientResponse {
+  bool ok = 1;
+}

@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package email;
+
+service EmailService {
+  rpc SendPasswordRecoveryPin (SendPasswordRecoveryPinRequest) returns (SendPasswordRecoveryPinResponse) {}
+  rpc SendFailedUserSync (SendFailedUserSyncRequest) returns (SendFailedUserSyncResponse) {}
+}
+
+// SendPasswordRecoveryPin
+message SendPasswordRecoveryPinRequest {
+  DataFromSendPasswordRecoveryPin data = 1;
+  string to = 2;
+}
+
+message DataFromSendPasswordRecoveryPin {
+  string pin = 1;
+  string username = 2;
+}
+
+message SendPasswordRecoveryPinResponse {
+  bool ok = 1;
+}
+
+// SendFailedUserSync
+message SendFailedUserSyncRequest {
+  DataFromSendFailedUserSync data = 1;
+}
+
+message DataFromSendFailedUserSync {
+  FailedSynchronizationFromSendFailedUserSync failedSync = 1;
+  string params = 2;
+}
+
+message FailedSynchronizationFromSendFailedUserSync {
+  string id = 1;
+  string createdAt = 2;
+  string exchange = 3;
+  string routingKey = 4;
+  string queueName = 5;
+  string errorMessage = 6;
+}
+
+message SendFailedUserSyncResponse {
+  bool ok = 1;
+}

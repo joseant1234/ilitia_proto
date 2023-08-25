@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package treatment_drug_schedule_reminder;
+
+
+// CreateDrugScheduleReminder
+message CreateDrugScheduleReminderFromPatientRequest {
+  string startTime = 1;
+  int32 drugScheduleId = 2;
+  bool activateNotifications = 3;
+  int32 remindEvery = 4;
+}
+
+message Reminder {
+  int32 id = 1;
+  string startTime = 2;
+  bool activateNotifications = 3;
+  int32 remindEvery = 4;
+}

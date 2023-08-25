@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package medical_test;
+
+service MedicalTestService {
+  rpc ListMedicalTests (ListMedicalTestsRequest) returns (ListMedicalTestsResponse) {}
+  rpc GetSetupListMedicalTests (GetSetupListMedicalTestsRequest) returns (GetSetupListMedicalTestsResponse) {}
+}
+
+// Common
+message MedicalTest {
+  int32 id = 1;
+  string takeDate = 2;
+  string requestDate = 3;
+  TestGroup testGroup = 4;
+  optional TestProfile testProfile = 5;
+  optional MedicalResult result = 6;
+}
+
+message TestGroup {
+  int32 id = 1;
+  string name = 2;
+}
+
+message TestProfile {
+  int32 id = 1;
+  string name = 2;
+}
+
+message MedicalResult {
+  int32 id = 1;
+  string name = 2;
+  string code = 3;
+}
+
+// ListMedicalTests
+message ListMedicalTestsRequest {
+  int32 page = 1;
+  int32 limit = 2;
+  optional int32 testGroup = 3;
+}
+
+message ListMedicalTestsResponse {
+  repeated MedicalTest results = 1;
+  int32 count = 2;
+}
+
+// GetSetupListMedicalTests
+message GetSetupListMedicalTestsRequest {
+}
+
+message GetSetupListMedicalTestsResponse {
+  repeated SetupTestGroup testGroups = 1;
+}
+
+message SetupTestGroup {
+  int32 id = 1;
+  string name = 2;
+}

@@ -3,7 +3,9 @@ syntax = "proto3";
 package appointment;
 
 service AppointmentService {
-  rpc ListAppointments (ListAppointmentsRequest) returns (ListAppointmentsResponse) {}
+  rpc ListAppointmentsFromEmployee (ListAppointmentsFromEmployeeRequest) returns (ListAppointmentsFromEmployeeResponse) {}
+  rpc ListAppointmentsFromPatient (ListAppointmentsFromPatientRequest) returns (ListAppointmentsFromPatientResponse) {}
+  rpc SolicitAppointmentChangeFromPatient (SolicitAppointmentChangeFromPatientRequest) returns (SolicitAppointmentChangeFromPatientResponse) {}
 }
 
 // Common
@@ -12,9 +14,11 @@ message Appointment {
   string date = 2;
   string timeFrom = 3;
   string timeTo = 4;
-  Patient patient = 5;
+  optional Patient patient = 5;
   optional ConsultType consultType = 6;
   optional string comments = 7;
+  optional Employee employee = 8;
+  optional Room room = 9;
 }
 
 message Patient {
@@ -36,13 +40,49 @@ message ConsultType {
   string name = 2;
 }
 
-// ListAppointments
-message ListAppointmentsRequest {
+message Employee {
+  int32 id = 1;
+  string firstName = 2;
+  optional string lastName = 3;
+  string fullName = 4;
+}
+
+message Room {
+  int32 id = 1;
+  string name = 2;
+}
+
+message AppointmentChangeRequest {
+  int32 id = 1;
+  string description = 2;
+}
+
+// ListAppointmentsFromEmployee
+message ListAppointmentsFromEmployeeRequest {
   string from = 1;
   string to = 2;
 }
 
-message ListAppointmentsResponse {
+message ListAppointmentsFromEmployeeResponse {
   repeated Appointment results = 1;
 }
 
+// ListAppointmentsFromPatient
+message ListAppointmentsFromPatientRequest {
+  optional string from = 1;
+  optional string to = 2;
+}
+
+message ListAppointmentsFromPatientResponse {
+  repeated Appointment results = 1;
+}
+
+
+// SolicitAppointmentChangeFromPatient
+message SolicitAppointmentChangeFromPatientRequest {
+  string description = 1;
+}
+
+message SolicitAppointmentChangeFromPatientResponse {
+  repeated AppointmentChangeRequest results = 1;
+}

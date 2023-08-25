@@ -2,11 +2,9 @@ syntax = "proto3";
 
 package failed_synchronization;
 
-import "google/protobuf/empty.proto";
-
 
 service FailedSynchronizationService {
-  rpc CreateRabbitFailedUserSynchronization (CreateRabbitFailedUserSynchronizationRequest) returns (google.protobuf.Empty) {}
+  rpc CreateRabbitFailedUserSynchronization (CreateRabbitFailedUserSynchronizationRequest) returns (RabbitFailedUserSynchronization) {}
   rpc ShowRabbitFailedUserSynchronization (ShowRabbitFailedUserSynchronizationRequest) returns (RabbitFailedUserSynchronization) {}
 }
 
@@ -18,6 +16,7 @@ message RabbitFailedUserSynchronization {
   string routingKey = 4;
   string queueName = 5;
   string errorMessage = 6;
+  string createdAt = 7;
 }
 
 message FailedUserSynchronizationParams {

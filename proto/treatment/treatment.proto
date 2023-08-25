@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package treatment;
+
+import "treatment/progression.proto";
+import "treatment/dose.proto";
+import "treatment/drug_schedule_reminder.proto";
+import "treatment/medication_taken.proto";
+
+service TreatmentService {
+  rpc GetProgression (treatment_progression.GetProgressionRequest) returns (treatment_progression.GetProgressionResponse) {}
+  rpc GetCurrentDosesFromPatient (treatment_dose.GetCurrentDosesFromPatientRequest) returns (treatment_dose.GetCurrentDosesFromResponse) {}
+  rpc CreateDrugScheduleReminderFromPatient (treatment_drug_schedule_reminder.CreateDrugScheduleReminderFromPatientRequest) returns (treatment_drug_schedule_reminder.Reminder) {}
+  rpc CreateMedicationTakenFromPatient (treatment_medication_taken.CreateMedicationTakenFromPatientRequest) returns (treatment_medication_taken.MedicationTaken) {}
+  rpc DeleteMedicationTakenFromPatient (treatment_medication_taken.DeleteMedicationTakenFromPatientRequest) returns (treatment_medication_taken.DeleteMedicationTakenFromPatientResponse) {}
+}

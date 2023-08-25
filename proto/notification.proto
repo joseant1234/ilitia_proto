@@ -1,0 +1,182 @@
+syntax = "proto3";
+
+package notification;
+
+service NotificationService {
+  rpc SaveAppointmentAlarm (SaveAppointmentAlarmRequest) returns (AppointmentAlarm) {}
+  rpc DeleteAppointmentAlarm (DeleteAppointmentAlarmRequest) returns (DeleteAppointmentAlarmResponse) {}
+  rpc SaveDevice (SaveDeviceRequest) returns (Device) {}
+  rpc GetDevice (GetDeviceRequest) returns (Device) {}
+  rpc UpdateNotificationSettings (UpdateNotificationSettingsRequest) returns (Device) {}
+  rpc NotifyApprovalAppointmentChangeRequest (NotifyApprovalAppointmentChangeRequestRequest) returns (NotifyApprovalAppointmentChangeRequestResponse) {}
+  rpc NotifySavingMedicalTest (NotifySavingMedicalTestRequest) returns (NotifySavingMedicalTestResponse) {}
+  rpc NotifySavingPrescription (NotifySavingPrescriptionRequest) returns (NotifySavingPrescriptionResponse) {}
+  rpc DeactivateDevice (DeactivateDeviceRequest) returns (DeactivateDeviceResponse) {}
+}
+
+// Common
+message Device {
+  string id = 1;
+  string token = 2;
+  string identifier = 3;
+  optional bool allowAppointmentNotifications = 4;
+  optional bool allowPrescriptionNotifications = 5;
+  optional bool allowTestNotifications = 6;
+}
+
+// SaveAppointmentAlarm
+message SaveAppointmentAlarmRequest {
+  string receptorId = 1;
+  SaveAppointmentInfoFromAlarmRequest appointment = 2;
+}
+
+message SaveAppointmentInfoFromAlarmRequest {
+  int32 id = 1;
+  string date = 2;
+  string timeFrom = 3;
+  string isoDatetime = 4;
+}
+
+message AppointmentAlarm {
+  string id = 1;
+  int32 appointmentId = 2;
+  string receptorId = 3;
+}
+
+// DeleteAppointmentAlarm
+message DeleteAppointmentAlarmRequest {
+  string receptorId = 1;
+  int32 appointmentId = 2;
+}
+
+message DeleteAppointmentAlarmResponse {
+  bool ok = 1;
+}
+
+// SaveDevice
+message SaveDeviceRequest {
+  string token = 1;
+  string userId = 2;
+  string identifier = 3;
+  optional bool allowAppointmentNotifications = 4;
+  optional bool allowPrescriptionNotifications = 5;
+  optional bool allowTestNotifications = 6;
+}
+
+// GetDevice
+message GetDeviceRequest {
+  string userId = 1;
+  string identifier = 2;
+}
+
+// UpdateNotificationSettings
+message UpdateNotificationSettingsRequest {
+  string id = 1;
+  bool allowAppointmentNotifications = 2;
+  bool allowPrescriptionNotifications = 3;
+  bool allowTestNotifications = 4;
+}
+
+// NotifyApprovalAppointmentChangeRequest
+message NotifyApprovalAppointmentChangeRequestRequest {
+  AppointmentFromNotifyApprovalAppointmentChangeRequest appointment = 1;
+  string userId = 2;
+  string reason = 3;
+}
+
+message AppointmentFromNotifyApprovalAppointmentChangeRequest {
+  int32 id = 1;
+  string date = 2;
+  string timeFrom = 3;
+  string timeTo = 4;
+}
+
+message NotifyApprovalAppointmentChangeRequestResponse {
+  bool ok = 1;
+}
+
+// NotifySavingMedicalTest
+message NotifySavingMedicalTestRequest {
+  MedicalTestFromNotifySavingMedicalTest medicalTest = 1;
+  string userId = 2;
+  string reason = 3;
+}
+
+message MedicalTestFromNotifySavingMedicalTest {
+  int32 id = 1;
+  optional string takenDate = 2;
+  optional string requestDate = 3;
+  optional TestGroupFromNotifySavingMedicalTest testGroup = 4;
+  optional TestProfileFromNotifySavingMedicalTest testProfile = 5;
+  optional MedicalResultFromNotifySavingMedicalTest result = 6;
+}
+
+message TestGroupFromNotifySavingMedicalTest {
+  int32 id = 1;
+  string name = 2;
+}
+
+message TestProfileFromNotifySavingMedicalTest {
+  int32 id = 1;
+  string name = 2;
+}
+
+message MedicalResultFromNotifySavingMedicalTest {
+  int32 id = 1;
+  string name = 2;
+  optional string code = 3;
+}
+
+message NotifySavingMedicalTestResponse {
+  bool ok = 1;
+}
+
+
+// NotifySavingPrescription
+message NotifySavingPrescriptionRequest {
+  PrescriptionFromNotifySavingPrescription prescription = 1;
+  string userId = 2;
+  string reason = 3;
+}
+
+message PrescriptionFromNotifySavingPrescription {
+  int32 id = 1;
+  string date = 2;
+  string finalNumber = 3;
+  optional DrugFromNotifySavingPrescription drug = 4;
+  optional int32 durationAmount = 5;
+  optional DurationUnitFromNotifySavingPrescription durationUnit = 6;
+  optional PrescriberFromNotifySavingPrescription prescriber = 7;
+}
+
+message DrugFromNotifySavingPrescription {
+  int32 id = 1;
+  string name = 2;
+}
+
+message DurationUnitFromNotifySavingPrescription {
+  int32 id = 1;
+  string name = 2;
+  optional string code = 3;
+}
+
+message PrescriberFromNotifySavingPrescription {
+  int32 id = 1;
+  string firstName = 2;
+  string fullName = 3;
+  optional string lastName = 4;
+}
+
+message NotifySavingPrescriptionResponse {
+  bool ok = 1;
+}
+
+// DeactivateDevice
+message DeactivateDeviceRequest {
+  string userId = 1;
+  string deviceIdentifier = 2;
+}
+
+message DeactivateDeviceResponse {
+  bool ok = 1;
+}

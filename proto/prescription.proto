@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package prescription;
+
+service PrescriptionService {
+  rpc ListPrescriptions (ListPrescriptionsRequest) returns (ListPrescriptionsResponse) {}
+  rpc GetSetupListPrescriptions (GetSetupListPrescriptionsRequest) returns (GetSetupListPrescriptionsResponse) {}
+}
+
+// Common
+message Prescription {
+  int32 id = 1;
+  string date = 2;
+  Drug drug = 3;
+  string finalNumber = 4;
+  Prescriber prescriber = 5;
+  int32 duration_amount = 6;
+  DurationUnit durationUnit = 7;
+}
+
+message Drug {
+  int32 id = 1;
+  string name = 2;
+}
+
+message Prescriber {
+  int32 id = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string fullName = 4;
+}
+
+message DurationUnit {
+  int32 id = 1;
+  string name = 2;
+  string code = 3;
+}
+
+// ListPrescriptions
+message ListPrescriptionsRequest {
+  int32 page = 1;
+  int32 limit = 2;
+  optional int32 doctor = 3;
+  optional int32 medicine = 4;
+}
+
+message ListPrescriptionsResponse {
+  repeated Prescription results = 1;
+  int32 count = 2;
+}
+
+// GetSetupListPrescriptions
+message GetSetupListPrescriptionsRequest {
+}
+
+message GetSetupListPrescriptionsResponse {
+  repeated SetupDoctor doctors = 1;
+  repeated SetupMedicine medicines = 2;
+}
+
+message SetupDoctor {
+  int32 id = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string fullName = 4;
+}
+
+message SetupMedicine {
+  int32 id = 1;
+  string name = 2;
+}
+
+

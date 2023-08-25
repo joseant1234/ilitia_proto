@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package treatment_medication_taken;
+
+
+// CreateMedicationTakenFromPatient
+message CreateMedicationTakenFromPatientRequest {
+  string takenDate = 1;
+  int32 drugScheduleDayId = 2;
+}
+
+message MedicationTaken {
+  int32 id = 1;
+  string takenDate = 2;
+}
+
+// DeleteMedicationTakenFromPatient
+message DeleteMedicationTakenFromPatientRequest {
+  int32 drugScheduleDayId = 1;
+}
+
+message DeleteMedicationTakenFromPatientResponse {
+  bool ok = 1;
+}
