@@ -46,14 +46,14 @@ message GetSetupSaveAttachmentResponse {
 }
 
 message SetupAttachmentOrigin {
-  int32 code = 1;
+  string code = 1;
   string value = 2;
 }
 
 // CreateAttachmentFromPatient
 message CreateAttachmentFromPatientRequest {
   string name = 1;
-  string source = 2;
+  string comesFrom = 2;
 }
 
 // DeleteAttachmentFromPatient
