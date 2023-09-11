@@ -4,7 +4,7 @@ package attachment;
 
 service AttachmentService {
   rpc ListAttachmentsFromPatient (ListAttachmentsFromPatientRequest) returns (ListAttachmentsFromPatientResponse) {}
-  rpc GetSetupSaveAttachment (GetSetupSaveAttachmentRequest) returns (GetSetupSaveAttachmentResponse) {}
+  rpc GetSetupAttachment (GetSetupAttachmentRequest) returns (GetSetupAttachmentResponse) {}
   rpc CreateAttachmentFromPatient (CreateAttachmentFromPatientRequest) returns (Attachment) {}
   rpc DeleteAttachmentFromPatient (DeleteAttachmentFromPatientRequest) returns (DeleteAttachmentFromPatientResponse) {}
 }
@@ -28,15 +28,24 @@ message ListAttachmentsFromPatientResponse {
   int32 count = 2;
 }
 
-// GetSetupSaveAttachment
-message GetSetupSaveAttachmentRequest {
+// GetSetupAttachment
+message GetSetupAttachmentRequest {
+}
+
+message GetSetupAttachmentResponse {
+  GetSetupListAttachmentResponse listSetup = 1;
+  GetSetupSaveAttachmentResponse saveSetup = 2;
+}
+
+message GetSetupListAttachmentResponse {
+  repeated SetupAttachmentOrigin origins = 1;
 }
 
 message GetSetupSaveAttachmentResponse {
-  repeated SetupAttachmentSource sources = 1;
+  repeated SetupAttachmentOrigin origins = 1;
 }
 
-message SetupAttachmentSource {
+message SetupAttachmentOrigin {
   int32 code = 1;
   string value = 2;
 }
