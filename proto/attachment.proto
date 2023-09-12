@@ -30,11 +30,13 @@ message ListAttachmentsFromPatientResponse {
 
 // GetSetupAttachment
 message GetSetupAttachmentRequest {
+  optional int32 getListSetup = 1;
+  optional int32 getSaveSetup = 2;
 }
 
 message GetSetupAttachmentResponse {
-  GetSetupListAttachmentResponse listSetup = 1;
-  GetSetupSaveAttachmentResponse saveSetup = 2;
+  optional GetSetupListAttachmentResponse listSetup = 1;
+  optional GetSetupSaveAttachmentResponse saveSetup = 2;
 }
 
 message GetSetupListAttachmentResponse {
