@@ -9,6 +9,7 @@ service NotificationService {
   rpc GetDevice (GetDeviceRequest) returns (Device) {}
   rpc UpdateNotificationSettings (UpdateNotificationSettingsRequest) returns (Device) {}
   rpc NotifyApprovalAppointmentChangeRequest (NotifyApprovalAppointmentChangeRequestRequest) returns (NotifyApprovalAppointmentChangeRequestResponse) {}
+  rpc NotifyRejectionAppointmentChangeRequest (NotifyRejectionAppointmentChangeRequestRequest) returns (NotifyRejectionAppointmentChangeRequestResponse) {}
   rpc NotifySavingMedicalTest (NotifySavingMedicalTestRequest) returns (NotifySavingMedicalTestResponse) {}
   rpc NotifySavingPrescription (NotifySavingPrescriptionRequest) returns (NotifySavingPrescriptionResponse) {}
   rpc DeactivateDevice (DeactivateDeviceRequest) returns (DeactivateDeviceResponse) {}
@@ -92,6 +93,21 @@ message AppointmentFromNotifyApprovalAppointmentChangeRequest {
 }
 
 message NotifyApprovalAppointmentChangeRequestResponse {
+  bool ok = 1;
+}
+
+// NotifyRejectionAppointmentChangeRequest
+message NotifyRejectionAppointmentChangeRequestRequest {
+  AppointmentFromNotifyRejectionAppointmentChangeRequest appointment = 1;
+  string userId = 2;
+  string reason = 3;
+}
+
+message AppointmentFromNotifyRejectionAppointmentChangeRequest {
+  int32 id = 1;
+}
+
+message NotifyRejectionAppointmentChangeRequestResponse {
   bool ok = 1;
 }
 
