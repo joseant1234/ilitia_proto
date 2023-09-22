@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package laboratory_integration;
+
+service LaboratoryIntegrationService {
+    rpc CreateTest(TestRequest) returns (CreateTestResponse);
+    rpc UpdateTest(TestRequest) returns (UpdateTestResponse);
+}
+
+enum Sex {
+    MALE = 0;
+    FEMALE = 1;
+}
+
+enum BillingType {
+    CLINIC = 0;
+    PATIENT = 1;
+}
+
+message TestRequest {
+    string firstName = 1;
+    string lastName = 2;
+    string birthdate = 3;
+    string email = 4;
+    Sex sex = 5;
+    bool is_donor = 6;
+    BillingType billing = 7;
+    int32 doctor_id = 8;
+    repeated int32 test_ids = 9;
+    int32 requested_by_user_id = 10;
+}
+
+message CreateTestResponse {
+    string requisite_id = 1;
+}
+
+message UpdateTestResponse {
+    string requisite_id = 1;
+}
