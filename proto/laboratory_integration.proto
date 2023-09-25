@@ -5,6 +5,7 @@ package laboratory_integration;
 service LaboratoryIntegrationService {
     rpc CreateTest(CreateTestRequest) returns (CreateTestResponse);
     rpc UpdateTest(UpdateTestRequest) returns (UpdateTestResponse);
+    rpc Login(OauthLoginRequest) returns (OauthLoginRequest);
 }
 
 enum Sex {
@@ -42,3 +43,7 @@ message CreateTestResponse {
 message UpdateTestResponse {
     string requisite_id = 1;
 }
+
+message OauthLoginRequest {}
+
+message OauthLoginResponse {}
