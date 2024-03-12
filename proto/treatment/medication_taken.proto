@@ -12,6 +12,19 @@ message CreateMedicationTakenFromPatientRequest {
 message MedicationTaken {
   int32 id = 1;
   string takenDate = 2;
+  repeated string notify = 3;
+  optional MedicineFromMedicationTaken medicine = 4;
+  optional PatientFromMedicationTaken patient = 5;
+}
+
+message MedicineFromMedicationTaken {
+  int32 id = 1;
+  string name = 2;
+}
+
+message PatientFromMedicationTaken {
+  int32 id = 1;
+  string fullName = 2;
 }
 
 // DeleteMedicationTakenFromPatient
