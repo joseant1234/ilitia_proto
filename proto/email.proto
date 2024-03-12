@@ -5,6 +5,7 @@ package email;
 service EmailService {
   rpc SendPasswordRecoveryPin (SendPasswordRecoveryPinRequest) returns (SendPasswordRecoveryPinResponse) {}
   rpc SendFailedUserSync (SendFailedUserSyncRequest) returns (SendFailedUserSyncResponse) {}
+  rpc SendMedicationTakenNotification (SendMedicationTakenNotificationRequest) returns (SendMedicationTakenNotificationResponse) {}
 }
 
 // SendPasswordRecoveryPin
@@ -42,5 +43,21 @@ message FailedSynchronizationFromSendFailedUserSync {
 }
 
 message SendFailedUserSyncResponse {
+  bool ok = 1;
+}
+
+// SendMedicationTakenNotification
+message SendMedicationTakenNotificationRequest {
+  DataFromSendMedicationTakenNotification data = 1;
+  repeated string to = 2;
+}
+
+message DataFromSendMedicationTakenNotification {
+  string takenDate = 1;
+  string medicineName = 2;
+  string patientFullName = 3;
+}
+
+message SendMedicationTakenNotificationResponse {
   bool ok = 1;
 }
