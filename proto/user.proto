@@ -117,4 +117,5 @@ message FindUserByUsernameRequest {
 message FindExternalUserRequest {
   string externalId = 1;
   string companyId = 2;
+  string externalModel = 3;
 }
